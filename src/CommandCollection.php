@@ -11,8 +11,6 @@ use NAttreid\Console\Console;
  */
 abstract class CommandCollection {
 
-    use \Nette\SmartObject;
-
     /** @var Console */
     private $console;
 

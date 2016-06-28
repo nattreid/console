@@ -25,6 +25,7 @@ class ConsolePresenter extends \Nette\Application\UI\Presenter {
     public function actionDefault($collection, $command, ...$args) {
         try {
             $this->console->execute($collection, $command, $args);
+            $this->terminate();
         } catch (\Nette\InvalidArgumentException $ex) {
             if ($this->console->isConsole()) {
                 $this->console->printLine("Command '$collection:$command' not exists.");

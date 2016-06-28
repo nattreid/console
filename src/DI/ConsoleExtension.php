@@ -23,7 +23,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
 
         $console = $builder->addDefinition($this->prefix('console'))
                 ->setClass('NAttreid\Console\Console')
-                ->setArguments([$config['consoleMode']]);
+                ->setArguments([$config['consoleMode'], $config['prefix']]);
 
         $collections = $config['commands'];
         array_unshift($collections, 'NAttreid\Console\Collections\App');

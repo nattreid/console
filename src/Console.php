@@ -19,11 +19,15 @@ class Console {
     /** @var boolean */
     private $isConsole;
 
+    /** @var string */
+    private $prefix;
+
     /** @var CommandCollection[] */
     private $collections = [];
 
-    public function __construct($isConsole) {
+    public function __construct($isConsole, $prefix) {
         $this->isConsole = $isConsole;
+        $this->prefix = $prefix;
     }
 
     /**
@@ -41,7 +45,7 @@ class Console {
     public function addCommandCollection(CommandCollection $collection) {
         $collection->setConsole($this);
         $class = new ClassType($collection);
-        $this->collections[String::lower($class->getShortName())] = $collection;
+        $this->collections[Strings::lower($class->getShortName())] = $collection;
     }
 
     /**
@@ -66,26 +70,22 @@ class Console {
             if ($class->hasMethod($command)) {
                 $method = $class->getMethod($command);
                 if ($method->isPublic() && !$method->isAbstract() && !$method->isStatic()) {
-                    $this->printTime();
+                    $this->printTime($class->getShortName() . ' => ' . $method->name);
                     $method->invokeArgs($this->collections[$collection], $class->combineArgs($method, $args));
-                    $this->printTime('Done', FALSE);
+                    $this->printTime($method->name . ' done');
                     return;
                 }
             }
+            throw new \Nette\InvalidArgumentException;
         }
-        throw new \Nette\InvalidArgumentException;
     }
 
     /**
      * Vypise cas a text
      * @param string $text
-     * @param boolean $fullyQualified
      */
-    private function printTime($text = NULL, $fullyQualified = TRUE) {
-        $line = '[' . date('d.m.Y H:i:s', time()) . '] '
-                . $text . (!empty($text) ? ' ' : '')
-                . ($fullyQualified ? $this->getName() . ' => ' : '')
-                . $this->getAction();
+    private function printTime($text) {
+        $line = '[' . date('d.m.Y H:i:s', time()) . '] ' . $text;
         $this->printLine($line);
     }
 
@@ -93,7 +93,7 @@ class Console {
      * Vypise napovedu
      * @param ClassType $class
      */
-    private function help(ClassType $class) {
+    private function help(ClassType $class = NULL) {
         if ($class === NULL) {
             foreach ($this->collections as $collection) {
                 $this->printHelp(new ClassType($collection));
@@ -123,7 +123,7 @@ class Console {
         $this->printLine($class->getDescription());
         $this->printLine();
 
-        foreach ($class->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+        foreach ($this->getMethod($class) as $method) {
             $line = $class->getShortName() . ':' . $method->name;
 
             foreach ($method->getParameters() as $param) {
@@ -150,7 +150,7 @@ class Console {
         $desc->setText($class->getDescription());
         $this->printLine($desc);
 
-        foreach ($class->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+        foreach ($this->getMethod($class) as $method) {
             $desc = Html::el('pre');
             $desc->setStyle('margin-bottom: 0px');
             $desc->setText(Strings::replace($method->getDocComment(), '/\ +/', ' '));
@@ -175,7 +175,7 @@ class Console {
                 $params[] = $p;
             }
 
-            $link = Strings::lower(str_replace(':', '/', $class->getShortName()) . '/' . $method->name);
+            $link = Strings::lower(str_replace(':', '/', $this->prefix . '/' . $class->getShortName()) . '/' . $method->name);
             $el->href('/' . $link . $args);
 
             $line = $desc . $el;
@@ -184,6 +184,19 @@ class Console {
             }
             $this->printLine($line);
         }
+    }
+
+    private function getMethod(ClassType $class) {
+        $methods = $class->getMethods(\ReflectionMethod::IS_PUBLIC & ~\ReflectionMethod::IS_PROTECTED);
+        $result = [];
+        foreach ($methods as $method) {
+            if (Strings::startsWith($method->name, '__') ||
+                    $method->name === 'setConsole') {
+                continue;
+            }
+            $result[] = $method;
+        }
+        return $result;
     }
 
     /**
