@@ -41,7 +41,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
 
     public function beforeCompile() {
         $builder = $this->getContainerBuilder();
-        $router = $builder->getByType('NAttreid\Routers\RouterFactory');
+        $router = $builder->getByType('NAttreid\Routing\RouterFactory');
         try {
             $builder->getDefinition($router)
                     ->addSetup('addRouter', ['@' . $this->prefix('router'), 0]);
