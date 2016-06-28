@@ -3,6 +3,7 @@
 namespace NAttreid\Console\Routing;
 
 use Nette\Application\Routers\Route,
+    Nette\Application\Routers\RouteList,
     Tracy\Debugger;
 
 /**
