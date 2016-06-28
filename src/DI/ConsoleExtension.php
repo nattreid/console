@@ -10,7 +10,7 @@ namespace NAttreid\Console\DI;
 class ConsoleExtension extends \Nette\DI\CompilerExtension {
 
     private $defaults = [
-        'consoleMode' => '%ConsoleMode%',
+        'consoleMode' => '%consoleMode%',
         'prefix' => 'cli',
         'commands' => []
     ];
