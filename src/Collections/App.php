@@ -23,7 +23,6 @@ class App extends CommandCollection {
      * Smazani expirovane session
      */
     public function clearSession() {
-        $this->printLine('Clear Session');
         $this->app->clearSession();
     }
 
@@ -31,7 +30,6 @@ class App extends CommandCollection {
      * Smazani cache
      */
     public function clearCache() {
-        $this->printLine('Clear Cache');
         $this->app->clearCache();
     }
 
@@ -39,7 +37,6 @@ class App extends CommandCollection {
      * Smazani cache modelu
      */
     public function cleanModelCache() {
-        $this->printLine('Clear Model Cache');
         $this->app->cleanModelCache();
     }
 
@@ -47,7 +44,6 @@ class App extends CommandCollection {
      * Smazani logu
      */
     public function clearLog() {
-        $this->printLine('Clear Log');
         $this->app->clearLog();
     }
 
@@ -55,7 +51,6 @@ class App extends CommandCollection {
      * Smazani temp
      */
     public function clearTemp() {
-        $this->printLine('Clear Temp');
         $this->app->clearTemp();
     }
 
@@ -63,7 +58,6 @@ class App extends CommandCollection {
      * Git pull
      */
     public function gitPull() {
-        $this->printLine('gitPull');
         $this->app->gitPull(TRUE);
     }
 
@@ -71,7 +65,6 @@ class App extends CommandCollection {
      * Aktualizace composeru
      */
     public function composerUpdate() {
-        $this->printLine('Composer update');
         $this->app->composerUpdate(TRUE);
     }
 

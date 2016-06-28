@@ -71,7 +71,7 @@ class Console {
                 $method = $class->getMethod($command);
                 if ($method->isPublic() && !$method->isAbstract() && !$method->isStatic()) {
                     $this->printTime($class->getShortName() . ' => ' . $method->name);
-                    $method->invokeArgs($this->collections[$collection], $class->combineArgs($method, $args));
+                    $method->invokeArgs($this->collections[$collection], $args);
                     $this->printTime($method->name . ' done');
                     return;
                 }
