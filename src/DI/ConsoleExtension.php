@@ -22,13 +22,14 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
         $config['consoleMode'] = \Nette\DI\Helpers::expand($config['consoleMode'], $this->getContainerBuilder()->parameters);
 
         $console = $builder->addDefinition($this->prefix('console'))
-                ->setClass('NAttreid\Console\Console');
+                ->setClass('NAttreid\Console\Console')
+                ->setArguments([$config['consoleMode']]);
 
         $collections = $config['commands'];
         array_unshift($collections, 'NAttreid\Console\Collections\App');
 
         foreach ($collections as $collection) {
-            $commandCollection = $builder->addDefinition($this->prefix('commands' . $this->getShortName($collection)))
+            $commandCollection = $builder->addDefinition($this->prefix('collection' . $this->getShortName($collection)))
                     ->setClass($this->getClass($collection), $collection instanceof Statement ? $collection->arguments : [])
                     ->addSetup('setConsole', [$console]);
             $console->addSetup('addCommandCollection', [$commandCollection]);
