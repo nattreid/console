@@ -6,7 +6,7 @@ use NAttreid\AppManager\AppManager,
     NAttreid\Console\CommandCollection;
 
 /**
- * Konzolova aplikace
+ * Sprava aplikace
  * 
  * @author Attreid <attreid@gmail.com>
  */
