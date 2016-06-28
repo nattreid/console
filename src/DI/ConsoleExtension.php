@@ -25,7 +25,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
                 ->setClass('NAttreid\Console\Console');
 
         $collections = $config['commands'];
-        array_unshift($collections, 'NAttreid\Console\Commands\App');
+        array_unshift($collections, 'NAttreid\Console\Collections\App');
 
         foreach ($collections as $collection) {
             $commandCollection = $builder->addDefinition($this->prefix('commands' . $this->getShortName($collection)))
@@ -42,8 +42,12 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
     public function beforeCompile() {
         $builder = $this->getContainerBuilder();
         $router = $builder->getByType('NAttreid\Routers\RouterFactory');
-        $builder->getDefinition($router)
-                ->addSetup('addRouter', ['@' . $this->prefix('router'), 0]);
+        try {
+            $builder->getDefinition($router)
+                    ->addSetup('addRouter', ['@' . $this->prefix('router'), 0]);
+        } catch (\Nette\DI\MissingServiceException $ex) {
+            throw new \Nette\DI\MissingServiceException("Missing extension 'nattreid/routing'");
+        }
 
         $builder->getDefinition('application.presenterFactory')
                 ->addSetup('setMapping', [
