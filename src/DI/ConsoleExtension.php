@@ -30,8 +30,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
 
         foreach ($collections as $collection) {
             $commandCollection = $builder->addDefinition($this->prefix('collection' . $this->getShortName($collection)))
-                    ->setClass($this->getClass($collection), $collection instanceof Statement ? $collection->arguments : [])
-                    ->addSetup('setConsole', [$console]);
+                    ->setClass($this->getClass($collection), $collection instanceof Statement ? $collection->arguments : []);
             $console->addSetup('addCommandCollection', [$commandCollection]);
         }
 
@@ -52,7 +51,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
 
         $builder->getDefinition('application.presenterFactory')
                 ->addSetup('setMapping', [
-                    ['Console' => 'NAttreid\Cosole\Control\*Presenter']
+                    ['Console' => 'NAttreid\Console\Control\*Presenter']
         ]);
     }
 

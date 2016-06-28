@@ -39,6 +39,7 @@ class Console {
      * @param CommandCollection $collection
      */
     public function addCommandCollection(CommandCollection $collection) {
+        $collection->setConsole($this);
         $class = new ClassType($collection);
         $this->collections[String::lower($class->getShortName())] = $collection;
     }
