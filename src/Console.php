@@ -64,8 +64,9 @@ class Console {
             $class = NULL;
         }
 
-        if ($command === 'help' || empty($command)) {
+        if ($command === 'help' || (empty($command) && empty($collection)) || (($collection === 'help' || $class !== NULL) && empty($command))) {
             $this->help($class);
+            return;
         } elseif ($class !== NULL) {
             if ($class->hasMethod($command)) {
                 $method = $class->getMethod($command);
@@ -76,8 +77,8 @@ class Console {
                     return;
                 }
             }
-            throw new \Nette\InvalidArgumentException;
         }
+        throw new \Nette\InvalidArgumentException;
     }
 
     /**
@@ -137,8 +138,8 @@ class Console {
                 $line .= "\t\t(" . Strings::replace($description, '/\ +/', ' ') . ')';
             }
             $this->printLine($line);
-            $this->printLine();
         }
+        $this->printLine();
     }
 
     /**

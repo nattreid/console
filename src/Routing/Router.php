@@ -25,7 +25,7 @@ class Router extends \NAttreid\Routing\Router {
         $router = $this->getRouter();
 
         if ($this->isConsole) {
-            $router[] = new CliRouter('App:help');
+            $router[] = new CliRouter();
         }
 
         // pousteni klienta na locale
