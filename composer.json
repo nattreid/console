@@ -20,7 +20,7 @@
         "nette/application": "~2.3",
         "nette/di": "~2.3",
         "nattreid/routing": "~1.0",
-        "nattreid/appmanager": "dev-master"
+        "nattreid/appmanager": "~1.0"
     },
     "require-dev": {
         "nette/tester": "~1.6"

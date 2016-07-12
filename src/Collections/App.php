@@ -36,8 +36,8 @@ class App extends CommandCollection {
     /**
      * Smazani cache modelu
      */
-    public function cleanModelCache() {
-        $this->app->cleanModelCache();
+    public function invalidateCache() {
+        $this->app->invalidateCache();
     }
 
     /**
