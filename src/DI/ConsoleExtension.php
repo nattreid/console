@@ -2,6 +2,10 @@
 
 namespace NAttreid\Console\DI;
 
+use NAttreid\Console\Collections\App,
+    NAttreid\Console\Routing\Router,
+    NAttreid\Routing\RouterFactory;
+
 /**
  * Rozsireni konzole
  * 
@@ -26,7 +30,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
                 ->setArguments([$config['consoleMode'], $config['prefix']]);
 
         $collections = $config['commands'];
-        array_unshift($collections, 'NAttreid\Console\Collections\App');
+        array_unshift($collections, App::class);
 
         foreach ($collections as $collection) {
             $commandCollection = $builder->addDefinition($this->prefix('collection' . $this->getShortName($collection)))
@@ -35,13 +39,13 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
         }
 
         $builder->addDefinition($this->prefix('router'))
-                ->setClass('NAttreid\Console\Routing\Router')
+                ->setClass(Router::class)
                 ->setArguments([$config['consoleMode'], $config['prefix']]);
     }
 
     public function beforeCompile() {
         $builder = $this->getContainerBuilder();
-        $router = $builder->getByType('NAttreid\Routing\RouterFactory');
+        $router = $builder->getByType(RouterFactory::class);
         try {
             $builder->getDefinition($router)
                     ->addSetup('addRouter', ['@' . $this->prefix('router'), 0]);
