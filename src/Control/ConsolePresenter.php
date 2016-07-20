@@ -12,8 +12,13 @@ use Tracy\Debugger,
  */
 class ConsolePresenter extends \Nette\Application\UI\Presenter {
 
-    /** @var Console @inject */
-    public $console;
+    /** @var Console */
+    private $console;
+
+    public function __construct(Console $console) {
+        parent::__construct();
+        $this->console = $console;
+    }
 
     public function startup() {
         parent::startup();
