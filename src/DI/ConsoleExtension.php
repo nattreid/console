@@ -23,7 +23,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
         $builder = $this->getContainerBuilder();
         $config = $this->validateConfig($this->defaults, $this->getConfig());
 
-        $config['consoleMode'] = \Nette\DI\Helpers::expand($config['consoleMode'], $this->getContainerBuilder()->parameters);
+        $config['consoleMode'] = \Nette\DI\Helpers::expand($config['consoleMode'], $builder->parameters);
 
         $console = $builder->addDefinition($this->prefix('console'))
                 ->setClass('NAttreid\Console\Console')
