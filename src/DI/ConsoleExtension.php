@@ -48,14 +48,14 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension {
         $router = $builder->getByType(RouterFactory::class);
         try {
             $builder->getDefinition($router)
-                    ->addSetup('addRouter', ['@' . $this->prefix('router'), 0]);
+                    ->addSetup('addRouter', ['@' . $this->prefix('router'), RouterFactory::PRIORITY_HIGH]);
         } catch (\Nette\DI\MissingServiceException $ex) {
             throw new \Nette\DI\MissingServiceException("Missing extension 'nattreid/routing'");
         }
 
         $builder->getDefinition('application.presenterFactory')
                 ->addSetup('setMapping', [
-                    ['Console' => 'NAttreid\Console\Control\*Presenter']
+                    ['ConsoleExt' => 'NAttreid\Console\Control\*Presenter']
         ]);
     }
 
