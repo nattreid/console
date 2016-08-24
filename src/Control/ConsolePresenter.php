@@ -15,7 +15,7 @@ class ConsolePresenter extends \Nette\Application\UI\Presenter {
     /** @var Console */
     private $console;
 
-    public function __construct(Console $console) {
+    public function __construct(Console $console = NULL) {
         parent::__construct();
         $this->console = $console;
     }
