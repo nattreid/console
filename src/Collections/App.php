@@ -20,8 +20,8 @@ class App extends CommandCollection {
     }
 
     /**
-     * Smazani expirovane session
-     * @param string $expiration (2 minutes, 4 days, atd)
+     * Smazani session
+     * @param string $expiration (2 minutes, 4 days, atd) NULL smaze pouze expirovanou session
      */
     public function clearSession($expiration = NULL) {
         $this->app->clearSession($expiration);
