@@ -2,80 +2,90 @@
 
 namespace NAttreid\Console\Collections;
 
-use NAttreid\AppManager\AppManager,
-    NAttreid\Console\CommandCollection;
+use NAttreid\AppManager\AppManager;
+use NAttreid\Console\CommandCollection;
 
 /**
  * Sprava aplikace
- * 
+ *
  * @author Attreid <attreid@gmail.com>
  */
-class App extends CommandCollection {
+class App extends CommandCollection
+{
 
-    /** @var AppManager */
-    private $app;
+	/** @var AppManager */
+	private $app;
 
-    public function __construct(AppManager $app) {
-        $this->app = $app;
-    }
+	public function __construct(AppManager $app)
+	{
+		$this->app = $app;
+	}
 
-    /**
-     * Smazani session
-     * @param string $expiration (2 minutes, 4 days, atd) NULL smaze pouze expirovanou session
-     */
-    public function clearSession($expiration = NULL) {
-        $this->app->clearSession($expiration);
-    }
+	/**
+	 * Smazani session
+	 * @param string $expiration (2 minutes, 4 days, atd) NULL smaze pouze expirovanou session
+	 */
+	public function clearSession($expiration = NULL)
+	{
+		$this->app->clearSession($expiration);
+	}
 
-    /**
-     * Smazani cache
-     */
-    public function clearCache() {
-        $this->app->clearCache();
-    }
+	/**
+	 * Smazani cache
+	 */
+	public function clearCache()
+	{
+		$this->app->clearCache();
+	}
 
-    /**
-     * Smazani cache modelu
-     */
-    public function invalidateCache() {
-        $this->app->invalidateCache();
-    }
+	/**
+	 * Smazani cache modelu
+	 */
+	public function invalidateCache()
+	{
+		$this->app->invalidateCache();
+	}
 
-    /**
-     * Smazani logu
-     */
-    public function clearLog() {
-        $this->app->clearLog();
-    }
+	/**
+	 * Smazani logu
+	 */
+	public function clearLog()
+	{
+		$this->app->clearLog();
+	}
 
-    /**
-     * Smazani temp
-     */
-    public function clearTemp() {
-        $this->app->clearTemp();
-    }
+	/**
+	 * Smazani temp
+	 */
+	public function clearTemp()
+	{
+		$this->app->clearTemp();
+	}
 
-    /**
-     * Git pull
-     */
-    public function gitPull() {
-        $this->app->gitPull(TRUE);
-    }
+	/**
+	 * Git pull
+	 */
+	public function gitPull()
+	{
+		$this->app->gitPull(TRUE);
+	}
 
-    /**
-     * Aktualizace composeru
-     */
-    public function composerUpdate() {
-        $this->app->composerUpdate(TRUE);
-    }
+	/**
+	 * Aktualizace composeru
+	 */
+	public function composerUpdate()
+	{
+		$this->app->composerUpdate(TRUE);
+	}
 
-    /**
-     * Zapnuti udrzby
-     */
-    public function maintenance() {
-        $this->printLine('Maintenance On');
-        $this->printLine("To turn off maintenance run application with parameter maintenanceOff in browser or 'php index.php maintenanceOff' in console");
-        $this->app->maintenance();
-    }
+	/**
+	 * Zapnuti udrzby
+	 */
+	public function maintenance()
+	{
+		$this->printLine('Maintenance On');
+		$this->printLine("To turn off maintenance run application with parameter maintenanceOff in browser or 'php index.php maintenanceOff' in console");
+		$this->app->maintenance();
+	}
 
 }

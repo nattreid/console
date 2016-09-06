@@ -2,12 +2,13 @@
 
 namespace NAttreid\Console\Control;
 
+use Nette\Security\AuthenticationException;
 use Tracy\Debugger,
     NAttreid\Console\Console;
 
 /**
  * Presenter pro konzolove aplikace
- * 
+ *
  * @author Attreid <attreid@gmail.com>
  */
 class ConsolePresenter extends \Nette\Application\UI\Presenter {
@@ -23,7 +24,7 @@ class ConsolePresenter extends \Nette\Application\UI\Presenter {
     public function startup() {
         parent::startup();
         if (!$this->console->isConsole() && Debugger::$productionMode) {
-            throw new \Nette\Security\AuthenticationException;
+            throw new AuthenticationException;
         }
     }
 
