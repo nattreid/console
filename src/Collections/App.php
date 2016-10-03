@@ -23,9 +23,9 @@ class App extends CommandCollection
 
 	/**
 	 * Smazani session
-	 * @param string $expiration (2 minutes, 4 days, atd) NULL smaze pouze expirovanou session
+	 * @param string $expiration (2 minutes, 4 days, atd) null smaze pouze expirovanou session
 	 */
-	public function clearSession($expiration = NULL)
+	public function clearSession($expiration = null)
 	{
 		$this->app->clearSession($expiration);
 	}
@@ -67,7 +67,7 @@ class App extends CommandCollection
 	 */
 	public function gitPull()
 	{
-		$this->app->gitPull(TRUE);
+		$this->app->gitPull(true);
 	}
 
 	/**
@@ -75,7 +75,7 @@ class App extends CommandCollection
 	 */
 	public function composerUpdate()
 	{
-		$this->app->composerUpdate(TRUE);
+		$this->app->composerUpdate(true);
 	}
 
 	/**

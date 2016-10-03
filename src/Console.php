@@ -66,13 +66,13 @@ class Console
 		if (isset($this->collections[$collection])) {
 			$class = new ClassType($this->collections[$collection]);
 		} else {
-			$class = NULL;
+			$class = null;
 		}
 
-		if ($command === 'help' || (empty($command) && empty($collection)) || (($collection === 'help' || $class !== NULL) && empty($command))) {
+		if ($command === 'help' || (empty($command) && empty($collection)) || (($collection === 'help' || $class !== null) && empty($command))) {
 			$this->help($class);
 			return;
-		} elseif ($class !== NULL) {
+		} elseif ($class !== null) {
 			if ($class->hasMethod($command)) {
 				$method = $class->getMethod($command);
 				if ($method->isPublic() && !$method->isAbstract() && !$method->isStatic()) {
@@ -100,9 +100,9 @@ class Console
 	 * Vypise napovedu
 	 * @param ClassType $class
 	 */
-	private function help(ClassType $class = NULL)
+	private function help(ClassType $class = null)
 	{
-		if ($class === NULL) {
+		if ($class === null) {
 			foreach ($this->collections as $collection) {
 				$this->printHelp(new ClassType($collection));
 			}
@@ -220,9 +220,9 @@ class Console
 	 * Vypise retezec na jeden radek
 	 * @param string $string
 	 */
-	public function printLine($string = NULL)
+	public function printLine($string = null)
 	{
-		if ($string !== NULL) {
+		if ($string !== null) {
 			echo $string;
 		}
 		if ($this->isConsole) {

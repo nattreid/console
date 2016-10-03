@@ -21,13 +21,13 @@ class CliRouter implements IRouter
 
 	public function constructUrl(Request $appRequest, Url $refUrl)
 	{
-		return NULL;
+		return null;
 	}
 
 	public function match(IRequest $httpRequest)
 	{
 		if (empty($_SERVER['argv']) || !is_array($_SERVER['argv'])) {
-			return NULL;
+			return null;
 		}
 
 		$params = ['action' => 'default'];
@@ -43,13 +43,13 @@ class CliRouter implements IRouter
 				} else {
 					$params[] = $arg;
 				}
-				$flag = NULL;
+				$flag = null;
 				continue;
 			}
 
 			if (isset($flag)) {
-				$params[$flag] = TRUE;
-				$flag = NULL;
+				$params[$flag] = true;
+				$flag = null;
 			}
 
 			if ($opt !== '') {
@@ -65,7 +65,7 @@ class CliRouter implements IRouter
 		@list($collection, $command) = \Nette\Application\Helpers::splitName($params[self::COMMAND_KEY]);
 		if (empty($collection)) {
 			$collection = $command;
-			$command = NULL;
+			$command = null;
 		}
 
 		unset($params[self::COMMAND_KEY]);
