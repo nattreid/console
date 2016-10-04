@@ -59,7 +59,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension
 
 		$builder->getDefinition('application.presenterFactory')
 			->addSetup('setMapping', [
-				['ConsoleExt' => 'NAttreid\Console\Control\*Presenter']
+				['Console' => 'NAttreid\Console\Control\*Presenter']
 			]);
 	}
 
