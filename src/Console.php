@@ -139,7 +139,7 @@ class Console
 			foreach ($method->getParameters() as $param) {
 				$line .= ' /' . $param->getName();
 				if ($param->isDefaultValueAvailable()) {
-					$line .= '=' . $param->getDefaultValue();
+					$line .= '=' . $this->getValue($param->getDefaultValue());
 				}
 			}
 			$description = $method->getDescription();
@@ -164,7 +164,7 @@ class Console
 		foreach ($this->getMethod($class) as $method) {
 			$desc = Html::el('pre');
 			$desc->setStyle('margin-bottom: 0px');
-			$desc->setText(Strings::replace($method->getDocComment(), '/\ +/', ' '));
+			$desc->setText(Strings::replace($method->getDocComment(), '/(\ |\t)+/', ' '));
 
 			$el = Html::el('a');
 			$el->setHtml($method->name);
@@ -172,16 +172,12 @@ class Console
 			$args = '';
 			$params = [];
 			foreach ($method->getParameters() as $param) {
-				if (empty($args)) {
-					$args .= '?';
-				} else {
-					$args .= '&';
-				}
-				$args .= $param->getName() . '=';
 				$p = $param->getName();
 				if ($param->isDefaultValueAvailable()) {
-					$args .= $param->getDefaultValue();
-					$p .= '=' . $param->getDefaultValue();
+					$value = $param->getDefaultValue();
+					$p .= '=' . $this->getValue($value);
+				} else {
+					$args .= (empty($args) ? '?' : '&') . $param->getName() . '=';
 				}
 				$params[] = $p;
 			}
@@ -194,6 +190,24 @@ class Console
 				$line .= ' (' . implode(', ', $params) . ')';
 			}
 			$this->printLine($line);
+		}
+	}
+
+	/**
+	 * @param $value
+	 * @return string
+	 */
+	private function getValue($value)
+	{
+		switch ($value) {
+			default:
+				return $value;
+			case null:
+				return 'null';
+			case true:
+				return '1';
+			case false:
+				return '0';
 		}
 	}
 
