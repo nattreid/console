@@ -2,8 +2,10 @@
 
 namespace NAttreid\Console;
 
+use Exception;
 use Nette\Reflection\ClassType;
 use Nette\Reflection\Method;
+use Nette\SmartObject;
 use Nette\Utils\Html;
 use Nette\Utils\Strings;
 
@@ -15,7 +17,7 @@ use Nette\Utils\Strings;
 class Console
 {
 
-	use \Nette\SmartObject;
+	use SmartObject;
 
 	/** @var boolean */
 	private $isConsole;
@@ -57,7 +59,7 @@ class Console
 	 * @param string $collection
 	 * @param string $command
 	 * @param array $args
-	 * @throws \Nette\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function execute($collection, $command, $args = [])
 	{
@@ -83,7 +85,7 @@ class Console
 				}
 			}
 		}
-		throw new \Nette\InvalidArgumentException;
+		throw new InvalidArgumentException;
 	}
 
 	/**
@@ -245,5 +247,9 @@ class Console
 			echo '<br/>';
 		}
 	}
+}
+
+class InvalidArgumentException extends Exception
+{
 
 }

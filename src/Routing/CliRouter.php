@@ -2,10 +2,12 @@
 
 namespace NAttreid\Console\Routing;
 
+use Nette\Application\Helpers;
 use Nette\Application\IRouter;
 use Nette\Application\Request;
 use Nette\Http\IRequest;
 use Nette\Http\Url;
+use Nette\SmartObject;
 
 /**
  * Router pro CLI
@@ -14,8 +16,7 @@ use Nette\Http\Url;
  */
 class CliRouter implements IRouter
 {
-
-	use \Nette\SmartObject;
+	use SmartObject;
 
 	const COMMAND_KEY = 'command';
 
@@ -62,7 +63,7 @@ class CliRouter implements IRouter
 			}
 		}
 
-		@list($collection, $command) = \Nette\Application\Helpers::splitName($params[self::COMMAND_KEY]);
+		@list($collection, $command) = Helpers::splitName($params[self::COMMAND_KEY]);
 		if (empty($collection)) {
 			$collection = $command;
 			$command = null;

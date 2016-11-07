@@ -5,14 +5,18 @@ namespace NAttreid\Console\DI;
 use NAttreid\Console\Collections\App;
 use NAttreid\Console\Routing\Router;
 use NAttreid\Routing\RouterFactory;
+use Nette\DI\CompilerExtension;
+use Nette\DI\Helpers;
+use Nette\DI\MissingServiceException;
 use Nette\DI\Statement;
+use Nette\Reflection\ClassType;
 
 /**
  * Rozsireni konzole
  *
  * @author Attreid <attreid@gmail.com>
  */
-class ConsoleExtension extends \Nette\DI\CompilerExtension
+class ConsoleExtension extends CompilerExtension
 {
 
 	private $defaults = [
@@ -26,7 +30,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension
 		$builder = $this->getContainerBuilder();
 		$config = $this->validateConfig($this->defaults, $this->getConfig());
 
-		$config['consoleMode'] = \Nette\DI\Helpers::expand($config['consoleMode'], $builder->parameters);
+		$config['consoleMode'] = Helpers::expand($config['consoleMode'], $builder->parameters);
 
 		$console = $builder->addDefinition($this->prefix('console'))
 			->setClass('NAttreid\Console\Console')
@@ -53,8 +57,8 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension
 		try {
 			$builder->getDefinition($router)
 				->addSetup('addRouter', ['@' . $this->prefix('router'), RouterFactory::PRIORITY_HIGH]);
-		} catch (\Nette\DI\MissingServiceException $ex) {
-			throw new \Nette\DI\MissingServiceException("Missing extension 'nattreid/routing'");
+		} catch (MissingServiceException $ex) {
+			throw new MissingServiceException("Missing extension 'nattreid/routing'");
 		}
 
 		$builder->getDefinition('application.presenterFactory')
@@ -84,7 +88,7 @@ class ConsoleExtension extends \Nette\DI\CompilerExtension
 	 */
 	private function getShortName($class)
 	{
-		$classType = new \Nette\Reflection\ClassType($this->getClass($class));
+		$classType = new ClassType($this->getClass($class));
 		return $classType->getShortName();
 	}
 

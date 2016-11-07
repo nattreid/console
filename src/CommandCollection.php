@@ -20,6 +20,7 @@ abstract class CommandCollection
 
 	/**
 	 * Vypise retezec na jeden radek
+	 * @param string $string
 	 */
 	protected function printLine($string)
 	{
