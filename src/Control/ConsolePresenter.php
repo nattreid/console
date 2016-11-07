@@ -33,10 +33,10 @@ class ConsolePresenter extends Presenter
 		}
 	}
 
-	public function actionDefault($collection, $command, ...$args)
+	public function actionDefault($collection, $command)
 	{
 		try {
-			$this->console->execute($collection, $command, $args);
+			$this->console->execute($collection, $command, $this->getParameters());
 		} catch (InvalidArgumentException $ex) {
 			if ($this->console->isConsole()) {
 				$this->console->printLine("Command '$collection:$command' doesn't exist.");
