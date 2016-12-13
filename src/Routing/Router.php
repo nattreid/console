@@ -34,7 +34,7 @@ class Router extends \NAttreid\Routing\Router
 		// pousteni klienta na locale
 		if (!Debugger::$productionMode) {
 			$router[] = $cliRouter = new RouteList();
-			$cliRouter[] = new Route($this->getUrl() . '[/<collection>][/<command>]', 'Console:Console:default');
+			$cliRouter[] = new Route($this->url . '[/<collection>][/<command>]', 'Console:Console:default');
 		}
 	}
 
