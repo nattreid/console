@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Console\Routing;
 
 use Nette\Application\Routers\Route;
@@ -14,10 +16,10 @@ use Tracy\Debugger;
 class Router extends \NAttreid\Routing\Router
 {
 
-	/** @var boolean */
+	/** @var bool */
 	private $isConsole;
 
-	public function __construct($isConsole, $prefix)
+	public function __construct(bool $isConsole, string $prefix)
 	{
 		parent::__construct($prefix);
 		$this->isConsole = $isConsole;

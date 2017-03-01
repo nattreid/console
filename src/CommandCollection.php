@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Console;
 
 /**
@@ -22,7 +24,7 @@ abstract class CommandCollection
 	 * Vypise retezec na jeden radek
 	 * @param string $string
 	 */
-	protected function printLine($string)
+	protected function printLine(string $string)
 	{
 		$this->console->printLine($string);
 	}

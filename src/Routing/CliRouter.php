@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Console\Routing;
 
 use Nette\Application\Helpers;
@@ -74,9 +76,9 @@ class CliRouter implements IRouter
 		$params['command'] = $command;
 
 		return new Request(
-			'Console:Console', //
-			'CLI', //
-			$params //
+			'Console:Console',
+			'CLI',
+			$params
 		);
 	}
 

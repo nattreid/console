@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Console\Collections;
 
 use NAttreid\AppManager\AppManager;
@@ -25,7 +27,7 @@ class App extends CommandCollection
 	 * Smazani session
 	 * @param string $expiration (2 minutes, 4 days, atd) null smaze pouze expirovanou session
 	 */
-	public function clearSession($expiration = null)
+	public function clearSession(string $expiration = null)
 	{
 		$this->app->clearSession($expiration);
 	}

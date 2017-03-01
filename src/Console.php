@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Console;
 
-use Exception;
 use Nette\Reflection\ClassType;
 use Nette\Reflection\Method;
 use Nette\SmartObject;
@@ -19,7 +20,7 @@ class Console
 
 	use SmartObject;
 
-	/** @var boolean */
+	/** @var bool */
 	private $isConsole;
 
 	/** @var string */
@@ -28,7 +29,7 @@ class Console
 	/** @var CommandCollection[] */
 	private $collections = [];
 
-	public function __construct($isConsole, $prefix)
+	public function __construct(bool $isConsole, string $prefix)
 	{
 		$this->isConsole = $isConsole;
 		$this->prefix = $prefix;
@@ -36,9 +37,9 @@ class Console
 
 	/**
 	 * Je apliakce spustena pres prikazovy radek?
-	 * @return boolean
+	 * @return bool
 	 */
-	public function isConsole()
+	public function isConsole(): bool
 	{
 		return $this->isConsole;
 	}
@@ -61,7 +62,7 @@ class Console
 	 * @param array $args
 	 * @throws InvalidArgumentException
 	 */
-	public function execute($collection, $command, $args = [])
+	public function execute(string $collection, string $command, array $args = [])
 	{
 		$collection = Strings::lower($collection);
 
@@ -98,7 +99,7 @@ class Console
 	 * Vypise cas a text
 	 * @param string $text
 	 */
-	private function printTime($text)
+	private function printTime(string $text)
 	{
 		$line = '[' . date('d.m.Y H:i:s', time()) . '] ' . $text;
 		$this->printLine($line);
@@ -167,7 +168,7 @@ class Console
 	{
 		$desc = Html::el('h1');
 		$desc->setText($class->getDescription());
-		$this->printLine($desc);
+		$this->printLine((string)$desc);
 
 		foreach ($this->getMethod($class) as $method) {
 			$desc = Html::el('pre');
@@ -202,10 +203,10 @@ class Console
 	}
 
 	/**
-	 * @param $value
+	 * @param mixed $value
 	 * @return string
 	 */
-	private function getValue($value)
+	private function getValue($value): string
 	{
 		switch ($value) {
 			default:
@@ -223,7 +224,7 @@ class Console
 	 * @param ClassType $class
 	 * @return Method[]
 	 */
-	private function getMethod(ClassType $class)
+	private function getMethod(ClassType $class): array
 	{
 		$methods = $class->getMethods(\ReflectionMethod::IS_PUBLIC & ~\ReflectionMethod::IS_PROTECTED);
 		$result = [];
@@ -242,7 +243,7 @@ class Console
 	 * Vypise retezec na jeden radek
 	 * @param string $string
 	 */
-	public function printLine($string = null)
+	public function printLine(string $string = null)
 	{
 		if ($string !== null) {
 			echo $string;
@@ -253,9 +254,4 @@ class Console
 			echo '<br/>';
 		}
 	}
-}
-
-class InvalidArgumentException extends Exception
-{
-
 }

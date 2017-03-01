@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Console\Control;
 
 use NAttreid\Console\Console;
@@ -33,7 +35,7 @@ class ConsolePresenter extends Presenter
 		}
 	}
 
-	public function actionDefault($collection, $command)
+	public function actionDefault(string $collection, string $command)
 	{
 		try {
 			$this->console->execute($collection, $command, $this->getParameters());
