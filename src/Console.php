@@ -62,7 +62,7 @@ class Console
 	 * @param array $args
 	 * @throws InvalidArgumentException
 	 */
-	public function execute(string $collection, string $command, array $args = [])
+	public function execute(string $collection = null, string $command = null, array $args = [])
 	{
 		$collection = Strings::lower($collection);
 

@@ -35,7 +35,7 @@ class ConsolePresenter extends Presenter
 		}
 	}
 
-	public function actionDefault(string $collection, string $command)
+	public function actionDefault(string $collection = null, string $command = null)
 	{
 		try {
 			$this->console->execute($collection, $command, $this->getParameters());
