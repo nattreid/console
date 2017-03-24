@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Console\DI;
 
@@ -88,7 +88,7 @@ class ConsoleExtension extends CompilerExtension
 	 * @param mixed $class
 	 * @return string
 	 */
-	private function getShortName($class):string
+	private function getShortName($class): string
 	{
 		$classType = new ClassType($this->getClass($class));
 		return $classType->getShortName();

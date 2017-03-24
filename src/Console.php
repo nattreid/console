@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Console;
 
@@ -168,7 +168,7 @@ class Console
 	{
 		$desc = Html::el('h1');
 		$desc->setText($class->getDescription());
-		$this->printLine((string)$desc);
+		$this->printLine((string) $desc);
 
 		foreach ($this->getMethod($class) as $method) {
 			$desc = Html::el('pre');
