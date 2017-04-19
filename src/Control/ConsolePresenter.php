@@ -27,7 +27,7 @@ class ConsolePresenter extends Presenter
 		$this->console = $console;
 	}
 
-	public function startup()
+	public function startup(): void
 	{
 		parent::startup();
 		if (!$this->console->isConsole() && Debugger::$productionMode) {
@@ -35,7 +35,7 @@ class ConsolePresenter extends Presenter
 		}
 	}
 
-	public function actionDefault(string $collection = null, string $command = null)
+	public function actionDefault(string $collection = null, string $command = null): void
 	{
 		try {
 			$this->console->execute($collection, $command, $this->getParameters());
