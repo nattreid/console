@@ -15,7 +15,7 @@ abstract class CommandCollection
 	/** @var Console */
 	private $console;
 
-	public function setConsole(Console $console)
+	public function setConsole(Console $console): void
 	{
 		$this->console = $console;
 	}
@@ -24,7 +24,7 @@ abstract class CommandCollection
 	 * Vypise retezec na jeden radek
 	 * @param string $string
 	 */
-	protected function printLine(string $string)
+	protected function printLine(string $string): void
 	{
 		$this->console->printLine($string);
 	}

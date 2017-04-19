@@ -17,7 +17,6 @@ use Nette\Utils\Strings;
  */
 class Console
 {
-
 	use SmartObject;
 
 	/** @var bool */
@@ -62,7 +61,7 @@ class Console
 	 * @param array $args
 	 * @throws InvalidArgumentException
 	 */
-	public function execute(string $collection = null, string $command = null, array $args = [])
+	public function execute(string $collection = null, string $command = null, array $args = []): void
 	{
 		$collection = Strings::lower($collection);
 
@@ -99,7 +98,7 @@ class Console
 	 * Vypise cas a text
 	 * @param string $text
 	 */
-	private function printTime(string $text)
+	private function printTime(string $text): void
 	{
 		$line = '[' . date('d.m.Y H:i:s', time()) . '] ' . $text;
 		$this->printLine($line);
@@ -109,7 +108,7 @@ class Console
 	 * Vypise napovedu
 	 * @param ClassType $class
 	 */
-	private function help(ClassType $class = null)
+	private function help(ClassType $class = null): void
 	{
 		if ($class === null) {
 			foreach ($this->collections as $collection) {
@@ -124,7 +123,7 @@ class Console
 	 * Vypise napovedu pro danou tridu
 	 * @param ClassType $class
 	 */
-	private function printHelp(ClassType $class)
+	private function printHelp(ClassType $class): void
 	{
 		if ($this->isConsole) {
 			$this->printConsoleHelp($class);
@@ -137,7 +136,7 @@ class Console
 	 * Vypise napovedu pro danou tridu v konzoli
 	 * @param ClassType $class
 	 */
-	private function printConsoleHelp(ClassType $class)
+	private function printConsoleHelp(ClassType $class): void
 	{
 		$this->printLine($class->getDescription());
 		$this->printLine();
@@ -164,7 +163,7 @@ class Console
 	 * Vypise napovedu pro danou tridu v HTML
 	 * @param ClassType $class
 	 */
-	private function printHtmlHelp(ClassType $class)
+	private function printHtmlHelp(ClassType $class): void
 	{
 		$desc = Html::el('h1');
 		$desc->setText($class->getDescription());
@@ -243,7 +242,7 @@ class Console
 	 * Vypise retezec na jeden radek
 	 * @param string $string
 	 */
-	public function printLine(string $string = null)
+	public function printLine(string $string = null): void
 	{
 		if ($string !== null) {
 			echo $string;

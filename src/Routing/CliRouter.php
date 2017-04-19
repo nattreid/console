@@ -22,12 +22,12 @@ class CliRouter implements IRouter
 
 	const COMMAND_KEY = 'command';
 
-	public function constructUrl(Request $appRequest, Url $refUrl)
+	public function constructUrl(Request $appRequest, Url $refUrl): ?string
 	{
 		return null;
 	}
 
-	public function match(IRequest $httpRequest)
+	public function match(IRequest $httpRequest): ?Request
 	{
 		if (empty($_SERVER['argv']) || !is_array($_SERVER['argv'])) {
 			return null;

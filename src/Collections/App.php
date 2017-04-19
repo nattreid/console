@@ -27,7 +27,7 @@ class App extends CommandCollection
 	 * Smazani session
 	 * @param string $expiration (2 minutes, 4 days, atd) null smaze pouze expirovanou session
 	 */
-	public function clearSession(string $expiration = null)
+	public function clearSession(string $expiration = null): void
 	{
 		$this->app->clearSession($expiration);
 	}
@@ -35,7 +35,7 @@ class App extends CommandCollection
 	/**
 	 * Smazani cache
 	 */
-	public function clearCache()
+	public function clearCache(): void
 	{
 		$this->app->clearCache();
 	}
@@ -43,7 +43,7 @@ class App extends CommandCollection
 	/**
 	 * Smazani cache modelu
 	 */
-	public function invalidateCache()
+	public function invalidateCache(): void
 	{
 		$this->app->invalidateCache();
 	}
@@ -51,7 +51,7 @@ class App extends CommandCollection
 	/**
 	 * Smazani logu
 	 */
-	public function clearLog()
+	public function clearLog(): void
 	{
 		$this->app->clearLog();
 	}
@@ -59,7 +59,7 @@ class App extends CommandCollection
 	/**
 	 * Smazani temp
 	 */
-	public function clearTemp()
+	public function clearTemp(): void
 	{
 		$this->app->clearTemp();
 	}
@@ -67,7 +67,7 @@ class App extends CommandCollection
 	/**
 	 * Git pull
 	 */
-	public function gitPull()
+	public function gitPull(): void
 	{
 		$this->app->gitPull(true);
 	}
@@ -75,7 +75,7 @@ class App extends CommandCollection
 	/**
 	 * Aktualizace composeru
 	 */
-	public function composerUpdate()
+	public function composerUpdate(): void
 	{
 		$this->app->composerUpdate(true);
 	}
@@ -83,7 +83,7 @@ class App extends CommandCollection
 	/**
 	 * Zapnuti udrzby
 	 */
-	public function maintenance()
+	public function maintenance(): void
 	{
 		$this->printLine('Maintenance On');
 		$this->printLine("To turn off maintenance run application with parameter maintenanceOff in browser or 'php index.php maintenanceOff' in console");

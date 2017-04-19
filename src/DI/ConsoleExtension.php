@@ -27,7 +27,7 @@ class ConsoleExtension extends CompilerExtension
 		'commands' => []
 	];
 
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
 		$config = $this->validateConfig($this->defaults, $this->getConfig());
@@ -52,7 +52,7 @@ class ConsoleExtension extends CompilerExtension
 			->setArguments([$config['consoleMode'], $config['prefix']]);
 	}
 
-	public function beforeCompile()
+	public function beforeCompile(): void
 	{
 		$builder = $this->getContainerBuilder();
 		$router = $builder->getByType(RouterFactory::class);

@@ -25,7 +25,7 @@ class Router extends \NAttreid\Routing\Router
 		$this->isConsole = $isConsole;
 	}
 
-	public function createRoutes()
+	public function createRoutes(): void
 	{
 		$router = $this->getRouter();
 
