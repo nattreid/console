@@ -35,7 +35,7 @@ class ConsoleExtension extends CompilerExtension
 		$config['consoleMode'] = Helpers::expand($config['consoleMode'], $builder->parameters);
 
 		$console = $builder->addDefinition($this->prefix('console'))
-			->setClass('NAttreid\Console\Console')
+			->setType('NAttreid\Console\Console')
 			->setArguments([$config['consoleMode'], $config['prefix']]);
 
 		$collections = $config['commands'];
@@ -43,12 +43,13 @@ class ConsoleExtension extends CompilerExtension
 
 		foreach ($collections as $collection) {
 			$commandCollection = $builder->addDefinition($this->prefix('collection' . $this->getShortName($collection)))
-				->setClass($this->getClass($collection), $collection instanceof Statement ? $collection->arguments : []);
+				->setType($this->getClass($collection))
+				->setFactory($this->getClass($collection), $collection instanceof Statement ? $collection->arguments : []);
 			$console->addSetup('addCommandCollection', [$commandCollection]);
 		}
 
 		$builder->addDefinition($this->prefix('router'))
-			->setClass(Router::class)
+			->setType(Router::class)
 			->setArguments([$config['consoleMode'], $config['prefix']]);
 	}
 
