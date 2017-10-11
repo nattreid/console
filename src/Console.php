@@ -82,7 +82,9 @@ class Console
 
 					$parameters = [];
 					foreach ($method->getParameters() as $param) {
-						$parameters[$param->name] = $args[$param->name];
+						if (isset($args[$param->name])) {
+							$parameters[$param->name] = $args[$param->name];
+						}
 					}
 
 					$method->invokeArgs($this->collections[$collection], $parameters);
