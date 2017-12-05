@@ -6,6 +6,8 @@ namespace NAttreid\Console\Control;
 
 use NAttreid\Console\Console;
 use NAttreid\Console\InvalidArgumentException;
+use Nette\Application\AbortException;
+use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 use Nette\Security\AuthenticationException;
 use Tracy\Debugger;
@@ -27,6 +29,9 @@ class ConsolePresenter extends Presenter
 		$this->console = $console;
 	}
 
+	/**
+	 * @throws AuthenticationException
+	 */
 	public function startup(): void
 	{
 		parent::startup();
@@ -35,6 +40,12 @@ class ConsolePresenter extends Presenter
 		}
 	}
 
+	/**
+	 * @param string|null $collection
+	 * @param string|null $command
+	 * @throws AbortException
+	 * @throws BadRequestException
+	 */
 	public function actionDefault(string $collection = null, string $command = null): void
 	{
 		try {
