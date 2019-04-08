@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace NAttreid\Console\Collections;
 
+use Exception;
 use NAttreid\AppManager\AppManager;
 use NAttreid\Console\CommandCollection;
+use NAttreid\Utils\TempFile;
 
 /**
  * Sprava aplikace
@@ -62,6 +64,30 @@ class App extends CommandCollection
 	public function clearTemp(): void
 	{
 		$this->app->clearTemp();
+	}
+
+	/**
+	 * Zaloha databaze
+	 * @param string $path
+	 * @throws Exception
+	 */
+	public function backupDatabase(string $path): void
+	{
+		$file = new TempFile(basename($path));
+		$this->app->backupDatabase($file);
+		$file->move(dirname($path));
+	}
+
+	/**
+	 * Zaloha
+	 * @param string $path
+	 * @throws Exception
+	 */
+	public function backup(string $path): void
+	{
+		$file = new TempFile(basename($path));
+		$this->app->backup($file);
+		$file->move(dirname($path));
 	}
 
 	/**
