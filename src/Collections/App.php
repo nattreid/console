@@ -7,6 +7,7 @@ namespace NAttreid\Console\Collections;
 use Exception;
 use NAttreid\AppManager\AppManager;
 use NAttreid\Console\CommandCollection;
+use NAttreid\Console\InvalidArgumentException;
 use NAttreid\Utils\TempFile;
 
 /**
@@ -73,6 +74,9 @@ class App extends CommandCollection
 	 */
 	public function backupDatabase(string $path): void
 	{
+		if (empty($path)) {
+			throw new InvalidArgumentException();
+		}
 		$file = new TempFile(basename($path));
 		$this->app->backupDatabase($file);
 		$file->move(dirname($path));
@@ -85,6 +89,9 @@ class App extends CommandCollection
 	 */
 	public function backup(string $path): void
 	{
+		if (empty($path)) {
+			throw new InvalidArgumentException();
+		}
 		$file = new TempFile(basename($path));
 		$this->app->backup($file);
 		$file->move(dirname($path));
