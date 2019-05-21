@@ -3,34 +3,34 @@
   "description": "Console for Nette Framework",
   "type": "library",
   "license": [
-    "MIT"
+	"MIT"
   ],
   "authors": [
-    {
-      "name": "Attreid",
-      "email": "attreid@gmail.com"
-    }
+	{
+	  "name": "Attreid",
+	  "email": "attreid@gmail.com"
+	}
   ],
   "require": {
-    "php": ">= 7.1",
-    "nette/application": "~2.4",
-    "nette/security": "~2.4",
-    "nette/di": "~2.4",
-    "nattreid/routing": "~1.0",
-    "nattreid/app-manager": "~1.0"
+	"php": ">= 7.1",
+	"nette/application": "~3.0",
+	"nette/security": "~3.0",
+	"nette/di": "~3.0",
+	"nattreid/routing": "~1.0",
+	"nattreid/app-manager": "~1.0"
   },
   "require-dev": {
-    "nette/tester": "~1.7",
-    "tracy/tracy": "~2.4"
+	"nette/tester": "~2.2",
+	"tracy/tracy": "~2.6"
   },
   "autoload": {
-    "classmap": [
-      "src/"
-    ]
+	"classmap": [
+	  "src/"
+	]
   },
   "extra": {
-    "branch-alias": {
-      "dev-master": "1.x-dev"
-    }
+	"branch-alias": {
+	  "dev-master": "1.x-dev"
+	}
   }
 }
